@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This manifest is for codesearch project at
+     https://chromium.googlesource.com/chromiumos/codesearch/ and includes
+     generated file repositories. For more info see
+     http://go/cros-infra-docs/chromeos-infra/resources/codesearch.md -->
+<manifest>
+  <include name="full.xml" />
+  <project path="gen/amd64-generic"
+           name="chromiumos/codesearch/gen/amd64-generic" />
+  <project path="gen/arm64-generic"
+           name="chromiumos/codesearch/gen/arm64-generic" />
+  <project path="gen/arm-generic"
+           name="chromiumos/codesearch/gen/arm-generic" />
+
+</manifest>

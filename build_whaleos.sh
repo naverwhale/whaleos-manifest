@@ -15,7 +15,7 @@ echo_help() {
   echo "Usage: path/to/manifest> ./build_whaleos.sh [args...]"
   echo "* Optional parameters:"
   echo "  @No parameter: Build packages only"
-  echo "  @Available param 1: base, dev, test, jenkins"
+  echo "  @Available param 1: base, dev, test"
   echo "      base: Build base image after building packages"
   echo "      dev: Build dev image after building packages"
   echo "      test: Build test image after building packages"
@@ -29,10 +29,11 @@ if [[ ! -z $1 && ! $1 =~ ^(base|dev|test)$ ]]; then
 fi
 
 if [[ ${CHROME_REV} == "" ]]; then
-  CHROME_REV="R96"
+  CHROME_REV="R120"
 fi
 
 WHALEOS_ROOT_PATH="$PWD/.."
+DEV_UPDATE_SERVER=""
 UPDATE_SERVER=""
 DEV_SERVER=""
 
@@ -41,6 +42,8 @@ IMAGE_DIR_PREFIX=${CHROME_REV}-${WHALEOS_VERSION}
 
 # MUST add package as full name.
 WORKON_PACKAGES=(
+  'app-i18n/chromeos-hangul'
+  'chromeos-base/chaps'
   'chromeos-base/chrome-icu'
   'chromeos-base/chromeos-chrome'
   'chromeos-base/chromeos-init'
@@ -49,31 +52,40 @@ WORKON_PACKAGES=(
   'chromeos-base/chromiumos-assets'
   'chromeos-base/common-assets'
   'chromeos-base/crash-reporter'
+  'chromeos-base/crosh'
+  'chromeos-base/crosh-extension'
   'chromeos-base/cryptohome'
-  'chromeos-base/factory'
-  'chromeos-base/factory_installer'
-  'chromeos-base/gestures-conf'
+  'chromeos-base/device_management'
+  'chromeos-base/diagnostics'
+  'chromeos-base/iioservice'
   'chromeos-base/libbrillo'
-  'chromeos-base/power_manager'
-  'chromeos-base/system_api'
+  'chromeos-base/libec'
+  'chromeos-base/libhwsec'
+  'chromeos-base/libmems'
+  'chromeos-base/missive'
   'chromeos-base/tpm_manager'
   'chromeos-base/tpm_manager-client'
-  'chromeos-base/vpd'
+  'chromeos-base/userfeedback'
   'media-libs/cros-camera-hal-usb'
-  'media-sound/adhd'
-  'net-misc/tlsdate'
-  'net-wireless/bluez'
   'sys-apps/flashrom'
   'sys-apps/frecon'
   'virtual/target-chromium-os'
-  'sys-kernel/chromeos-kernel-5_10'
-)
+    'chromeos-base/os_install_service'
+    'chromeos-base/power_manager'
+    'chromeos-base/vpd'
+    'net-misc/tlsdate'
+    'media-libs/mesa-llvmpipe'
+    'sys-kernel/chromeos-kernel-5_15'
+    'sys-kernel/linux-firmware'
+  )
 
 echo "** Setup for image building **"
 cd $WHALEOS_ROOT_PATH
 cros_sdk -- setup_board --board=${BOARD}
+cros_sdk -- sudo sysctl -w vm.max_map_count=262144
 
 PACKAGES_WORKON_STARTED=$(cros_sdk -- cros_workon --board=${BOARD} list)
+# https://unix.stackexchange.com/a/104848
 TO_STOP=($(comm -13 <(printf '%s\n' "${WORKON_PACKAGES[@]}" | LC_ALL=C sort) \
     <(printf '%s\n' "${PACKAGES_WORKON_STARTED[@]}" | LC_ALL=C sort)))
 TO_START=($(comm -23 <(printf '%s\n' "${WORKON_PACKAGES[@]}" | LC_ALL=C sort) \
@@ -86,8 +98,16 @@ if [[ ${#TO_START[@]} -gt 0 ]]; then
 fi
 
 echo "** Build packages **"
-cros_sdk -- ./build_packages --board=${BOARD}
+sudo mkdir -p out/build/amd64-generic/usr/lib64
+LIBRT_PATH="out/build/amd64-generic/usr/lib64/librt.so"
+if [ ! -f $LIBRT_PATH ]; then
+  sudo ln -s "../../../${BOARD}/lib64/librt.so.1" $LIBRT_PATH
+fi
+cros_sdk -- build_packages --board=${BOARD}
 cros_sdk -- emerge-${BOARD} ${WORKON_PACKAGES[@]}
+if [[ $1 == "jenkins" ]]; then
+  cros_sdk BOARD=${BOARD} -- emerge-${BOARD} grub
+fi
 
 if [[ -z "$1" ]]; then
   echo "Build packages only done."
@@ -99,11 +119,10 @@ if [[ $1 =~ ^(base|dev|test)$ ]]; then
   if [[ $1 == "test" ]]; then
     EXTRA_COMMANDS="--noenable_rootfs_verification"
   fi
-  cros_sdk FLAGS_version=${WHALEOS_VERSION} \
-      CHROMEOS_VERSION_DEVSERVER=${DEV_SERVER} \
+  cros_sdk CHROMEOS_VERSION_DEVSERVER=${DEV_SERVER} \
       CHROMEOS_VERSION_AUSERVER=${UPDATE_SERVER} \
-      -- ./build_image --board=${BOARD} ${EXTRA_COMMANDS} \
-      $1 --replace
+      -- build_image --board=${BOARD} ${EXTRA_COMMANDS} \
+      --version=${WHALEOS_VERSION} $1 --replace
   exit 0
 fi
 

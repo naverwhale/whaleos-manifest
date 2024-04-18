@@ -5,10 +5,13 @@
 <manifest>
   <project path="src/third_party/kernel/upstream"
            name="chromiumos/third_party/kernel"
-           revision="03c20efd5da10c8a9fa55dbb59ab230cb68c43ce">
+           revision="d93d7a9e81c01b800b7304e7dce0005fe1139e86">
     <!-- This repo is only used in ToT for upstream development
          syncing and will never be used in branches.  Pin to a
          commit when branching to avoid creating a lot of unused branches. -->
     <annotation name="branch-mode" value="pin" />
+
+    <annotation name="bisection-branch" value="refs/heads/merge/continuous/kernelupstream-bisect-6.6-rc2_6.6-rc4" />
+
   </project>
 </manifest>
