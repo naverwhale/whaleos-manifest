@@ -10,7 +10,7 @@
   <project groups="partner-config" name="chromiumos/project" path="src/project_public" revision="ce6047db9768728b46d9ae7769fb7f3f9d3b0c9d" />
   <project groups="crosvm" name="chromiumos/docs" path="docs" revision="11aa07e81f09d1baec08e2762908e0efbff7d281" />
   <project groups="minilayout,firmware,buildtools,chromeos-admin,labtools,sysmon,devserver" name="chromiumos/infra_virtualenv" path="infra_virtualenv" revision="cab8a95f2961561eb56a95d6f2bfc685686db75a" />
-  <project groups="minilayout,firmware,buildtools,chromeos-admin,labtools,sysmon,devserver,crosvm" name="whaleos-chromite" path="chromite" remote="whaleos" revision="refs/heads/main">
+  <project groups="minilayout,firmware,buildtools,chromeos-admin,labtools,sysmon,devserver,crosvm" name="whaleos-chromite" path="chromite" remote="whaleos" revision="refs/heads/r96">
     <copyfile dest="AUTHORS" src="AUTHORS" />
     <copyfile dest="LICENSE" src="LICENSE" />
   </project>
@@ -64,11 +64,11 @@
   <project name="aosp/platform/system/libhidl" path="src/aosp/system/libhidl" revision="471609b486435ebb3b1136dfe24fca24a48c74ff" />
   <project name="aosp/platform/system/core/libsync" path="src/aosp/system/libsync" revision="2069472e9e66b3b7d6fa7800a1f91c0e9290b4c2" />
   <project name="aosp/platform/system/logging" path="src/aosp/system/logging" revision="47a22f5a8ab194749f2e4faedff997dab344534f" />
-  <project name="whaleos-update_engine" path="src/aosp/system/update_engine" remote="whaleos" revision="refs/heads/main" />
-  <project groups="minilayout,firmware" name="whaleos-overlays" path="src/overlays" remote="whaleos" revision="refs/heads/main" />
-  <project groups="crosvm" name="whaleos-platform2" path="src/platform2" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-update_engine" path="src/aosp/system/update_engine" remote="whaleos" revision="refs/heads/r96" />
+  <project groups="minilayout,firmware" name="whaleos-overlays" path="src/overlays" remote="whaleos" revision="refs/heads/r96" />
+  <project groups="crosvm" name="whaleos-platform2" path="src/platform2" remote="whaleos" revision="refs/heads/r96" />
   <project name="chromiumos/platform/experimental" path="src/platform/experimental" revision="2927fce20adf74b0c9a32a61e3edff894221f283" />
-  <project name="whaleos-platform-assets" path="src/platform/assets" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-platform-assets" path="src/platform/assets" remote="whaleos" revision="refs/heads/r96" />
   <project name="chromiumos/platform/audiotest" path="src/platform/audiotest" revision="3573db7b05c9cc9ba9ac28a84fc50878cc6f50eb" />
   <project name="chromiumos/platform/bisect-kit" path="src/platform/bisect-kit" revision="be658b7f7ade05a1b340b88b8cbda5931d045c30" />
   <project name="chromiumos/platform/bmpblk" path="src/platform/bmpblk" revision="d4ab83ac871c21f02153a12676cbef5919c1d0a8" />
@@ -77,7 +77,7 @@
   <project name="chromiumos/platform/cbor" path="src/platform/cbor" revision="67aa7858c5ceada16d1d26f54de99a35ecf00ecd" />
   <project name="chromiumos/platform/cfm-device-monitor" path="src/platform/cfm-device-monitor" revision="572ba9b4241822db24987ad39c68276da209569a" />
   <project name="chromiumos/platform/chameleon" path="src/platform/chameleon" revision="c153fbb364902d5b0c2d62729f03b21d4454377d" />
-  <project name="whaleos-platform-chromiumos-assets" path="src/platform/chromiumos-assets" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-platform-chromiumos-assets" path="src/platform/chromiumos-assets" remote="whaleos" revision="refs/heads/r96" />
   <project name="chromiumos/platform/cobble" path="src/platform/cobble" revision="4ab43f1f86b7099b8ad75cf9615ea1fa155bbd7d" />
   <project name="chromiumos/containers/cros-container-guest-tools" path="src/platform/container-guest-tools" revision="fb4a13138d5110719d21c7c1f9a85aa73d940a26" />
   <project groups="firmware" name="chromiumos/platform/ec" path="src/platform/cr50" revision="3cac98670745fc5ca82a058fab512567f8444759" />
@@ -94,7 +94,7 @@
   <project name="whaleos-factory" path="src/platform/factory" remote="whaleos" revision="refs/heads/main" />
   <project name="whaleos-factory_installer" path="src/platform/factory_installer" remote="whaleos" revision="refs/heads/main" />
   <project groups="firmware" name="chromiumos/platform/firmware" path="src/platform/firmware" revision="024be235384d78ef3a2ab7d5e2b3bca604f5c3c7" />
-  <project name="whaleos-frecon" path="src/platform/frecon" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-frecon" path="src/platform/frecon" remote="whaleos" revision="refs/heads/r96" />
   <project name="chromiumos/platform/gestures" path="src/platform/gestures" revision="a28a77b65c2a4aa951f893fd388e068bb0a7987d" />
   <project name="chromiumos/platform/glbench" path="src/platform/glbench" revision="7b11d2e63e1c19b68e9e45dbe4285258dc1fbd3d" />
   <project groups="notdefault,crostini" name="chromiumos/platform/glbench" path="src/platform/glbench-debian" revision="refs/heads/release-R96-14268.B-debian" />
@@ -145,9 +145,9 @@
   <project name="chromiumos/platform/usi-test" path="src/platform/usi-test" revision="ca7b4b66c18c97e1d7e21b36a9c76239ea0530ef" />
   <project groups="firmware,buildtools" name="chromiumos/platform/vboot_reference" path="src/platform/vboot_reference" revision="edcc9cd30731fafc410675ac90e3b90f822e1d9f" />
   <project name="chromiumos/platform/vkbench" path="src/platform/vkbench" revision="96811b97cb9e532d6149f2c0bd5c18987cef3eef" />
-  <project name="whaleos-vpd" path="src/platform/vpd" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-vpd" path="src/platform/vpd" remote="whaleos" revision="refs/heads/r96" />
   <project name="whaleos-xorg-conf" path="src/platform/xorg-conf" remote="whaleos" revision="refs/heads/main" />
-  <project groups="minilayout,firmware,buildtools,labtools" name="whaleos-crosutils" path="src/scripts" remote="whaleos" revision="refs/heads/main" />
+  <project groups="minilayout,firmware,buildtools,labtools" name="whaleos-crosutils" path="src/scripts" remote="whaleos" revision="refs/heads/r96" />
 
   <project groups="crosvm" name="chromiumos/third_party/adhd" path="src/third_party/adhd" revision="13f4a33df33238a7c70021759a77fa673a9e9907" />
   <project name="chromiumos/third_party/arm-trusted-firmware" path="src/third_party/arm-trusted-firmware" revision="ab5964aadcf090c816804a798c0d49bc0c9b5183" />
@@ -179,7 +179,7 @@
   </project>
   <project groups="firmware" name="chromiumos/third_party/cbootimage" path="src/third_party/cbootimage" revision="b7d5b2d6a6dd05874d86ee900ff441d261f9034c" />
   <project name="chromiumos/third_party/chre" path="src/third_party/chre" revision="24c20c96d942a14419a19625b37d8081b9ca23ea" />
-  <project groups="minilayout,firmware,labtools" name="whaleos-chromiumos-overlay" path="src/third_party/chromiumos-overlay" remote="whaleos" revision="refs/heads/main" sync-c="true" />
+  <project groups="minilayout,firmware,labtools" name="whaleos-chromiumos-overlay" path="src/third_party/chromiumos-overlay" remote="whaleos" revision="refs/heads/r96" sync-c="true" />
   <project groups="firmware" name="chromiumos/third_party/coreboot" path="src/third_party/coreboot" revision="625f3b99e626a9ca1aea52424c930cd491fc5052" />
 
   
@@ -196,7 +196,7 @@
   <project groups="firmware" name="chromiumos/third_party/edk2" path="src/third_party/edk2" revision="282203eb87cd384171690356a0771f1e09aa2c68" />
   <project groups="firmware" name="chromiumos/third_party/em100" path="src/third_party/em100" revision="ae88135ac22f2255299fbf15ff28186458afe4e1" />
   <project groups="firmware" name="chromiumos/third_party/flashmap" path="src/third_party/flashmap" revision="9c71c8331ad52a11d29496ffb10cbdb1a51e2ccb" />
-  <project groups="firmware" name="whaleos-flashrom" path="src/third_party/flashrom" remote="whaleos" revision="refs/heads/main" />
+  <project groups="firmware" name="whaleos-flashrom" path="src/third_party/flashrom" remote="whaleos" revision="refs/heads/r96" />
   <project groups="firmware" name="chromiumos/third_party/edk2" path="src/third_party/fsp/cml/edk2/branch1" revision="264551f027e80cd73a4554b431043ff29c6685a8" />
   <project groups="firmware" name="chromiumos/third_party/edk2" path="src/third_party/fsp/cnl/edk2" revision="6e5bdae95d8c2b70b8d6634d967332740dd3737f" />
   <project groups="firmware" name="chromiumos/third_party/edk2" path="src/third_party/fsp/glk/edk2" revision="d10e52094db793c1a38fac02a29013dc04c0e4f7" />
@@ -213,7 +213,7 @@
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v4.19" revision="cc3c91e3dccefa94b7d72569a2918ba7ee64d99c" />
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v4.19-ht" revision="32c067a0e895f8d2e65c56ef4c43da87f00394dd" />
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v4.19-manatee" revision="7a693e957167215fab90a62bdc418cc2ab921074" />
-  <project name="whaleos-kernel" path="src/third_party/kernel/v5.10" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-kernel" path="src/third_party/kernel/v5.10" remote="whaleos" revision="refs/heads/r96" />
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v5.4-manatee" revision="b0fcb811fd9c0bee9feadccfda27ff80049a6534" />
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v5.4-arcvm" revision="75cee75ce8bc5bc291ab976552366d4542232ef7" />
   <project name="chromiumos/third_party/kernel" path="src/third_party/kernel/v5.10-arcvm" revision="c97412ec58af0593d74c549b2f3aaa9d1d658531" />
@@ -269,7 +269,7 @@
   <project name="chromiumos/third_party/svunit" path="src/third_party/svunit" revision="76ffd92958212a8e427a8eb6d24956df6ec19dbe" />
   <project groups="firmware" name="chromiumos/third_party/sysbios" path="src/third_party/sysbios" revision="33e1db34b8162de72a5e9bbbc44e6bce38978396" />
   <project name="chromiumos/third_party/systemd" path="src/third_party/systemd" revision="6b08fdfc2c5ca9adb0e443e19b40a910c777de64" />
-  <project name="whaleos-tlsdate" path="src/third_party/tlsdate" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-tlsdate" path="src/third_party/tlsdate" remote="whaleos" revision="refs/heads/r96" />
   <project groups="minilayout" name="chromiumos/third_party/toolchain-utils" path="src/third_party/toolchain-utils" revision="b01a69606f2fddb351224b22dedc64a2810745fe" />
   <project groups="firmware" name="chromiumos/platform/tpm" path="src/third_party/tpm" revision="421593a8cea1083288d5d047b0c43f85c92fe069" />
   <project groups="firmware,crosvm" name="chromiumos/third_party/tpm2" path="src/third_party/tpm2" revision="2149ae0304029034c65eed0e73b63194550e639a" />
@@ -315,6 +315,6 @@
   <project name="platform/system/keymaster" path="src/aosp/system/keymaster" remote="aosp" revision="49dfc58d6c4c66f5d0b0d06f0161da4e602a1293" />
 
   
-  <project name="whaleos-manifest" path="manifest" remote="whaleos" revision="refs/heads/main" />
+  <project name="whaleos-manifest" path="manifest" remote="whaleos" revision="refs/heads/r96" />
 
 </manifest>
